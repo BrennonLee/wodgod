@@ -23,18 +23,16 @@ const getTodaysWod = async () => {
     const sectionTitle = $(this).text();
     wods[i]["title"] = sectionTitle;
   });
-
   names.each(function(i) {
-    const wodName = $(this).text();
-    wods[i]["wodName"] = wodName;
+    const wodName = $(this)?.text();
+    if (wods[i]) {
+      wods[i]["wodName"] = wodName;
+    }
   });
 
   workouts.each(function(i) {
-    const workout = $(this)
-      .html()
-      .replace(/<br>/g, " ")
-      .replace(/  /g, "\n");
-    if (workout) {
+    const workout = $(this)!.html()!.replace(/<br>/g, " ").replace(/  /g, "\n");
+    if (workout && wods[i]) {
       wods[i]["workout"] = workout;
     }
   });

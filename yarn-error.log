@@ -1,0 +1,57 @@
+Arguments: 
+  /Users/brennonlee/.nvm/versions/node/v8.11.4/bin/node /Users/brennonlee/.yarn/bin/yarn.js
+
+PATH: 
+  /Users/brennonlee/.yarn/bin:/Users/brennonlee/.config/yarn/global/node_modules/.bin:/Users/brennonlee/google-cloud-sdk/bin:/Library/Python/3.6/bin:/Users/brennonlee/.fastlane/bin:/Users/brennonlee/.nvm/versions/node/v8.11.4/bin:/Users/brennonlee/.composer/vendor/bin:/usr/local/opt/pyenv/shims:/usr/local/opt/pyenv/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin
+
+Yarn version: 
+  1.19.1
+
+Node version: 
+  8.11.4
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/brennonlee/personal/wodgod/package.json: Unexpected token } in JSON at position 173
+      at JSON.parse (<anonymous>)
+      at /Users/brennonlee/.yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/brennonlee/.yarn/lib/cli.js:304:30)
+      at /Users/brennonlee/.yarn/lib/cli.js:315:13
+      at <anonymous>
+
+npm manifest: 
+  {
+    "name": "wod_god",
+    "version": "1.0.0",
+    "description": "Wodify signin app",
+    "main": "app.js",
+    "scripts": {
+      "start": "nodemon --exec babel-node src/app.js",
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/mosnicholas/wodgod.git"
+    },
+    "author": "mosnicholas",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/mosnicholas/wodgod/issues"
+    },
+    "homepage": "https://github.com/mosnicholas/wodgod#readme",
+    "devDependencies": {
+      "@now/node": "^1.4.1"
+    },
+    "dependencies": {
+      "axios": "^0.19.2",
+      "cheerio": "^1.0.0-rc.3"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
