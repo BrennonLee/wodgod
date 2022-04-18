@@ -4,7 +4,9 @@
   "description": "Wodify signin app",
   "main": "app.js",
   "scripts": {
-    "fetch-todays-wod": "tsc api/todays-wod.ts"
+    "fetch-todays-wod": "tsc api/todays-wod.ts",
+    "cypress remote test": "npx cypress run --record --key ecfa3495-62fc-41dd-ae66-fe8fd3692ce8",
+    "wodify-signup": "cypress run --spec 'cypress/integration/wodify/**/*'"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
+    "cypress": "^9.5.4",
     "form-data": "^4.0.0",
     "pretty-format": "^27.5.1",
     "request": "^2.88.2"
