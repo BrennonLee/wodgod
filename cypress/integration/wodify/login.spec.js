@@ -40,9 +40,9 @@ describe('login to wodify', () => {
                 cy.get('[id=wt51_wtMainContent_wt31]').click()
                 cy.wait(500)
                 // TODO test
-                cy.get('.ClassButton').eq(1).should('contain', "Reserve").click()
+                // cy.get('.ClassButton').eq(1).should('contain', "Reserve").click()
                 // 7am class is the 5th button down
-                // cy.get('.ClassButton').eq(4).should('contain', "Reserve").click()
+                cy.get('.ClassButton').eq(4).should('contain', "Reserve").click()
             })
         })
     })
