@@ -1,11 +1,10 @@
 name: Signup
 on:
   schedule:
-    - cron: "0 14 * * 3" # Wednesday -> Monday
-    - cron: "0 14 * * 4" # Thursday -> Tuesday
-    # - cron: "0 14 * * 5" # Friday -> Wednesday (Rest day)
-    - cron: "0 14 * * 6" # Saturday -> Thursday
-    - cron: "0 14 * * 7" # Sunday -> Friday
+    - cron: 0 14 * * 3 # Wednesday -> Monday
+    - cron: 0 14 * * 4 # Thursday -> Tuesday
+    - cron: 0 14 * * 6 # Saturday -> Thursday
+    - cron: 0 14 * * 7 # Sunday -> Friday
 
 jobs:
   signup:
