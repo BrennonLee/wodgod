@@ -42,7 +42,7 @@ describe('login to wodify', () => {
                 // TODO test
                 // cy.get('.ClassButton').eq(1).should('contain', "Reserve").click()
                 // 7am class is the 5th button down
-                cy.get('.ClassButton').eq(4).should('contain', "Reserve").click()
+                cy.get('.ClassButton').eq(4).should('contain', "Reserve").click({ position: 'topLeft' })
             })
         })
     })
