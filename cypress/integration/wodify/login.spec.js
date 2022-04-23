@@ -1,8 +1,10 @@
 describe('login to wodify', () => {
     it('allows me to login', () => {
-        cy.viewport('macbook-15')
-        const username = Cypress.env('username')
-        const password = Cypress.env('password')
+        cy.viewport('ipad-2')
+        // const username = Cypress.env('username')
+        // const password = Cypress.env('password')
+        const username = 'brennonplee@gmail.com'
+        const password = 'p46qv2G$j9RxfTZ'
         cy.visit('/SignIn/Login?OriginalURL=&RequiresConfirm=false')
         cy.get('[id=Input_UserName]').type(username).should('have.value', username)
         cy.get('[id=Input_Password]').type(password).should('have.value', password)
@@ -42,7 +44,13 @@ describe('login to wodify', () => {
                 // TODO test
                 // cy.get('.ClassButton').eq(1).should('contain', "Reserve").click()
                 // 7am class is the 5th button down
-                cy.get('.ClassButton').eq(4).should('contain', "Reserve").click({ position: 'topLeft' })
+                // cy.window().then((win) => {
+                //     win.scrollTo(0, 400);
+                //   });
+                cy.get('.ClassButton').then($elements => {cy.wrap($elements[4]).click({force: true});}); 
+
+                // cy.get('.ClassButton').next().next().next().next().next().should('be.visible').should('contain', "Reserve").click({force: true})
+                // cy.get('.ClassButton').eq(4).should('be.visible').should('contain', "Reserve").click({force: true})
             })
         })
     })
