@@ -1,10 +1,8 @@
 describe('login to wodify', () => {
     it('allows me to login', () => {
         cy.viewport('ipad-2')
-        // const username = Cypress.env('username')
-        // const password = Cypress.env('password')
-        const username = 'brennonplee@gmail.com'
-        const password = 'p46qv2G$j9RxfTZ'
+        const username = Cypress.env('username')
+        const password = Cypress.env('password')
         cy.visit('/SignIn/Login?OriginalURL=&RequiresConfirm=false')
         cy.get('[id=Input_UserName]').type(username).should('have.value', username)
         cy.get('[id=Input_Password]').type(password).should('have.value', password)
