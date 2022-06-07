@@ -3,11 +3,13 @@ on:
   schedule:
     - cron: '48 14 * * 3' # Wednesday -> Monday
     - cron: '48 14 * * 4' # Thursday -> Tuesday
+    - cron: '48 14 * * 5' # Friday -> Wednesday
     - cron: '48 14 * * 6' # Saturday -> Thursday
     - cron: '48 14 * * 0' # Sunday -> Friday
 
 jobs:
   signup_brennon:
+    if: github.event.schedule != '48 14 * * 5'
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
