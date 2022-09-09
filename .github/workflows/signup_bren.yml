@@ -1,8 +1,5 @@
 name: Signup Bren
 on:
-  push:
-    branches:
-      - "master"
   # Run at 8:48 AM mtn
   schedule:
     - cron: '48 14 * * 3' # Wednesday -> Monday
