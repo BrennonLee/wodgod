@@ -1,5 +1,6 @@
 name: Signup
 on:
+  # Run at 8:48 AM mtn
   schedule:
     - cron: '48 14 * * 3' # Wednesday -> Monday
     - cron: '48 14 * * 4' # Thursday -> Tuesday
@@ -24,7 +25,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          spec: cypress/integration/wodify/**/*
+          spec: cypress/integration/wodify/login_7am.spec.js
         env:
           CYPRESS_username: ${{ secrets.BRENNON_USERNAME }}
           CYPRESS_password: ${{ secrets.BRENNON_PW }}
@@ -38,41 +39,6 @@ jobs:
         with:
           fromPhoneNumber: ${{ secrets.TWILIO_FROM_NUMBER }}
           toPhoneNumber: ${{ secrets.BRENNON_NUMBER }}
-          message: "You've been signed up for PeakFit at 7am on ${{ env.SIGNUP_DATE }}"
-        env:
-          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-          TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
-          TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
-
-  signup_liz:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🏗 Setup repo
-        uses: actions/checkout@v2
-
-      - name: 🏗 Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 12.x
-          cache: yarn
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          spec: cypress/integration/wodify/**/*
-        env:
-          CYPRESS_username: ${{ secrets.LIZ_USERNAME }}
-          CYPRESS_password: ${{ secrets.LIZ_PW }}
-
-      - name: Set signup date
-        run: |
-          echo "SIGNUP_DATE=$(date +'%Y-%m-%d' -d "+5 days")" >> ${GITHUB_ENV}
-
-      - name: 'Sending SMS Notification'
-        uses: twilio-labs/actions-sms@v1
-        with:
-          fromPhoneNumber: ${{ secrets.TWILIO_FROM_NUMBER }}
-          toPhoneNumber: ${{ secrets.LIZ_NUMBER }}
           message: "You've been signed up for PeakFit at 7am on ${{ env.SIGNUP_DATE }}"
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}

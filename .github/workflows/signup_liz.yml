@@ -1,0 +1,45 @@
+name: Signup
+on:
+  # Run at 4:01 PM mtn
+  schedule:
+    - cron: '01 22 * * 3' # Wednesday -> Monday
+    - cron: '01 22 * * 4' # Thursday -> Tuesday
+    - cron: '01 22 * * 5' # Friday -> Wednesday
+    - cron: '01 22 * * 6' # Saturday -> Thursday
+    - cron: '01 22 * * 0' # Sunday -> Friday
+
+jobs:
+  signup_liz:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v2
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+          cache: yarn
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          spec: cypress/integration/wodify/login_4pm.spec.js
+        env:
+          CYPRESS_username: ${{ secrets.LIZ_USERNAME }}
+          CYPRESS_password: ${{ secrets.LIZ_PW }}
+
+      - name: Set signup date
+        run: |
+          echo "SIGNUP_DATE=$(date +'%Y-%m-%d' -d "+5 days")" >> ${GITHUB_ENV}
+
+      - name: 'Sending SMS Notification'
+        uses: twilio-labs/actions-sms@v1
+        with:
+          fromPhoneNumber: ${{ secrets.TWILIO_FROM_NUMBER }}
+          toPhoneNumber: ${{ secrets.LIZ_NUMBER }}
+          message: "You've been signed up for PeakFit at 7am on ${{ env.SIGNUP_DATE }}"
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
+          TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
