@@ -1,4 +1,4 @@
-name: Signup
+name: Signup Bren
 on:
   # Run at 8:48 AM mtn
   schedule:

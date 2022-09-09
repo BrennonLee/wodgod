@@ -1,4 +1,4 @@
-name: Signup
+name: Signup Liz
 on:
   # Run at 4:01 PM mtn
   schedule:
