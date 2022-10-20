@@ -10,6 +10,7 @@ on:
 
 jobs:
   signup_liz:
+    if: github.event.schedule != '01 22 * * 5'
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
@@ -32,11 +33,7 @@ jobs:
         env:
           CYPRESS_username: ${{ secrets.LIZ_USERNAME }}
           CYPRESS_password: ${{ secrets.LIZ_PW }}
-
-      - name: Set signup date
-        run: |
-          echo "SIGNUP_DATE=$(date +'%Y-%m-%d' -d "+5 days")" >> ${GITHUB_ENV}
-
+          
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
         with:

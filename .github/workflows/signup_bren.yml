@@ -1,16 +1,16 @@
 name: Signup Bren
 on:
-  # Run at 8:48 AM mtn
+  # Run at 4:09 AM mtn
   schedule:
-    - cron: '48 14 * * 3' # Wednesday -> Monday
-    - cron: '48 14 * * 4' # Thursday -> Tuesday
-    - cron: '48 14 * * 5' # Friday -> Wednesday
-    - cron: '48 14 * * 6' # Saturday -> Thursday
-    - cron: '48 14 * * 0' # Sunday -> Friday
+    - cron: '09 22 * * 3' # Wednesday -> Monday
+    - cron: '09 22 * * 4' # Thursday -> Tuesday
+    - cron: '09 22 * * 5' # Friday -> Wednesday
+    - cron: '09 22 * * 6' # Saturday -> Thursday
+    - cron: '09 22 * * 0' # Sunday -> Friday
 
 jobs:
   signup_brennon:
-    if: github.event.schedule != '48 14 * * 5'
+    if: github.event.schedule != '09 22 * * 5'
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
@@ -29,7 +29,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          spec: cypress/integration/wodify/login_7am.spec.js
+          spec: cypress/integration/wodify/login_4pm.spec.js
         env:
           CYPRESS_username: ${{ secrets.BRENNON_USERNAME }}
           CYPRESS_password: ${{ secrets.BRENNON_PW }}
@@ -39,7 +39,7 @@ jobs:
         with:
           fromPhoneNumber: ${{ secrets.TWILIO_FROM_NUMBER }}
           toPhoneNumber: ${{ secrets.BRENNON_NUMBER }}
-          message: "You've been signed up for PeakFit at 7am on ${{ env.SIGNUP_DATE }}"
+          message: "You've been signed up for PeakFit at 4pm on ${{ env.SIGNUP_DATE }}"
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
