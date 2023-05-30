@@ -10,16 +10,16 @@ on:
 
 jobs:
   signup_brennon:
-    if: github.event.schedule != '09 22 * * 5'
+    if: github.event.schedule != '09 23 * * 5'
     runs-on: ubuntu-latest
     steps:
-      - name: 🏗 Setup repo
+      - name: 🏗 Setup Repo
         uses: actions/checkout@v2
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: 16.x
           cache: yarn
 
       - name: 📆 Set signup date

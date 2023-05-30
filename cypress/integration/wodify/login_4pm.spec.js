@@ -1,6 +1,5 @@
 describe('login to wodify', () => {
     it('allows me to login', () => {
-        cy.viewport('ipad-2')
         const username = Cypress.env('username')
         const password = Cypress.env('password')
         cy.visit('/SignIn/Login?OriginalURL=&RequiresConfirm=false')
@@ -12,8 +11,8 @@ describe('login to wodify', () => {
         /**
          * @return Bluebird<string>
          */
-        function waitOneSecond () {
-            // return a promise that resolves after 1 second
+        function waitThreeSeconds () {
+            // return a promise that resolves after 3 seconds
             return new Cypress.Promise((resolve, reject) => {
             setTimeout(() => {
                 // set waited to true
@@ -21,30 +20,30 @@ describe('login to wodify', () => {
     
                 // resolve with 'foo' string
                 resolve('foo')
-            }, 1000)
+            }, 3000)
             })
         }
+        
+        const now = new Date()
+        // Add 5 days to the current date for next reservation
+        now.setDate(now.getDate() + 5)
+        const nextSignUpDateInput = `${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()}`
 
         cy.then(() => {
-            return waitOneSecond().then((str) => {
-                // Navigate to the mobile friendly version (easier to parse)
-                cy.visit('Mobile/Class_Schedule.aspx')
-                // Click 5 times to get 5 days ahead
-                cy.get('[id=wt51_wtMainContent_wt31]').click()
+            return waitThreeSeconds().then((str) => {
+                // Navigate to the calendar page
+                cy.visit('Schedule/CalendarListViewEntry.aspx')
                 cy.wait(500)
-                cy.get('[id=wt51_wtMainContent_wt31]').click()
-                cy.wait(400)
-                cy.get('[id=wt51_wtMainContent_wt31]').click()
-                cy.wait(500)
-                cy.get('[id=wt51_wtMainContent_wt31]').click()
-                cy.wait(400)
-                cy.get('[id=wt51_wtMainContent_wt31]').click()
-                cy.wait(500)
-                // Scroll down since the 4pm class is towards the bottom of the page
-                cy.scrollTo(0, 1800)
-                cy.wait(500)
-                cy.get('.ClassButton').then($elements => {cy.wrap($elements[12]).click({force: true});}); 
-
+                // Click on the date input box and input current date + 5 days
+                cy.get('[id=AthleteTheme_wt6_block_wtMainContent_wt9_W_Utils_UI_wt216_block_wtDateInputFrom]')
+                .clear()
+                .type(`${nextSignUpDateInput}{enter}`)
+                cy.wait(2000)
+                // 4pm open gym button
+                // cy.get('[id=AthleteTheme_wt6_block_wtMainContent_wt9_wtClassTable_ctl15_wtAddReservationLink2]').click()
+                // 4pm class reservation
+                cy.get('[id=AthleteTheme_wt6_block_wtMainContent_wt9_wtClassTable_ctl16_wtAddReservationLink2]').click()
+                cy.wait(1000)
             })
         })
     })
