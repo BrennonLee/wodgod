@@ -3,6 +3,7 @@ describe('login to wodify', () => {
         const username = Cypress.env('username')
         const password = Cypress.env('password')
         cy.visit('/SignIn/Login?OriginalURL=&RequiresConfirm=false')
+        cy.wait(1000)
         cy.get('[id=Input_UserName]').type(username).should('have.value', username)
         cy.get('[id=Input_Password]').type(password).should('have.value', password)
         cy.get('.signin-btn').click()
